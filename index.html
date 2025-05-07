@@ -178,22 +178,21 @@
     document.getElementById('copyButton').style.display = 'inline-block';
   }
 
-  function copyHTML() {
+  async function copyHTML() {
     const signaturePreview = document.getElementById('signaturePreview');
-    const range = document.createRange();
-    const selection = window.getSelection();
-
-    range.selectNodeContents(signaturePreview);
-    selection.removeAllRanges();
-    selection.addRange(range);
+    const html = signaturePreview.innerHTML;
 
     try {
-      document.execCommand('copy');
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          'text/html': new Blob([html], { type: 'text/html' }),
+          'text/plain': new Blob([signaturePreview.textContent], { type: 'text/plain' })
+        })
+      ]);
       alert('Signature preview copied to clipboard!');
     } catch (err) {
       alert('Failed to copy signature preview: ' + err);
     }
-    selection.removeAllRanges();
   }
 </script>
 </body>
