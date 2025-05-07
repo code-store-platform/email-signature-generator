@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Email Signature Generator</title>
+  <style>
+      :root {
+          --accent-color: #FF01B0;
+          --text-color: #000;
+          --font-family: Arial, sans-serif;
+      }
+
+      body {
+          font-family: var(--font-family);
+          margin: 20px;
+          font-size: 14px;
+      }
+
+      .content {
+          display: flex;
+          gap: 50px;
+          width: 100%;
+      }
+
+      label {
+          display: block;
+          margin-top: 10px;
+          font-weight: bold;
+      }
+
+      input {
+          width: 100%;
+          max-width: 400px;
+          padding: 6px 10px;
+          margin-bottom: 8px;
+          font-size: 14px;
+          border: 1px solid var(--text-color);
+          border-radius: 4px;
+      }
+
+      button {
+          margin-top: 16px;
+          padding: 8px 16px;
+          font-size: 14px;
+          background-color: var(--accent-color);
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+      }
+
+      button:hover {
+          opacity: 0.9;
+      }
+
+      .spaced {
+          margin-top: 20px;
+      }
+
+      #copyButton {
+          margin-top: 10px;
+          display: none;
+      }
+  </style>
+</head>
+<body>
+<h2>Email Signature Generator</h2>
+<div class="content">
+  <div class="form-block">
+    <label for="name">Full Name: *</label>
+    <input id="name" placeholder="Oksana Shmiliak" />
+
+    <label for="position">Position: *</label>
+    <input id="position" placeholder="HR" />
+
+    <label for="phone">Phone:</label>
+    <input id="phone" placeholder="+33 781 040 121" />
+
+    <label for="linkedin">LinkedIn URL:</label>
+    <input id="linkedin" placeholder="https://www.linkedin.com/in/your-profile/" />
+
+    <label for="facebook">Facebook URL:</label>
+    <input id="facebook" placeholder="https://www.facebook.com/your-page" />
+
+    <label for="instagram">Instagram URL:</label>
+    <input id="instagram" placeholder="https://www.instagram.com/your-profile/" />
+
+    <label for="youtube">YouTube URL:</label>
+    <input id="youtube" placeholder="https://www.youtube.com/@yourchannel" />
+
+    <button onclick="generateSignature()">Generate</button>
+  </div>
+
+  <div class="info-block">
+    <div class="preview spaced" id="signaturePreview"></div>
+    <button id="copyButton" onclick="copyHTML()">Copy HTML</button>
+  </div>
+</div>
+
+<script>
+  function generateSignature() {
+    const name = document.getElementById('name').value.trim();
+    const position = document.getElementById('position').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const website = 'https://code.store';
+    const linkedin = document.getElementById('linkedin').value.trim() || 'https://www.linkedin.com/company/code-store-tech/';
+    const facebook = document.getElementById('facebook').value.trim();
+    const instagram = document.getElementById('instagram').value.trim() || 'https://www.instagram.com/code.store_tech/';
+    const youtube = document.getElementById('youtube').value.trim();
+
+    if (!name || !position) {
+      alert('Full Name and Position are required.');
+      return;
+    }
+
+    const html = `
+<table cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; font-size: 14px; color: #000;">
+  <tr>
+    <td style="vertical-align: top; padding-right: 10px;">
+      <img src="https://d36urhup7zbd7q.cloudfront.net/5007226260291584/4815612250292224/d2ce7639-308e-4bb0-9137-67fc3c3760df/logo.gif" alt="Logo" style="height: 110px;" />
+    </td>
+    <td style="border-left: 1px solid; padding-left: 10px;">
+      <p style="margin: 0; font-weight: bold; font-size: 16px;">${name}</p>
+      <p style="margin: 0; font-weight: bold;">${position}, code.store</p>
+
+      <table cellpadding="0" cellspacing="0" style="margin-top: 8px;">
+        ${phone ? `
+        <tr>
+          <td style="padding: 2px 6px 2px 0;">
+            <img src="https://img.icons8.com/?size=100&id=9659&format=png&color=FF01B0" alt="Phone" style="width: 14px; height: 14px;" />
+          </td>
+          <td>
+            <a href="tel:${phone.replace(/\s+/g, '')}" style="text-decoration: none; color: #000;">${phone}</a>
+          </td>
+        </tr>` : ''}
+        <tr>
+          <td style="padding: 2px 6px 2px 0;">
+            <img src="https://img.icons8.com/?size=100&id=53372&format=png&color=FF01B0" alt="Website" style="width: 14px; height: 14px;" />
+          </td>
+          <td>
+            <a href="${website}" style="text-decoration: none; color: #000;">code.store</a>
+          </td>
+        </tr>
+      </table>
+
+      <table cellpadding="0" cellspacing="0" style="margin-top: 8px;">
+        <tr>
+          ${youtube ? `<td style="padding-right: 5px;">
+            <a href="${youtube}">
+              <img src="https://img.icons8.com/?size=100&id=62852&format=png&color=000000" alt="YouTube" style="width: 15px; height: 15px;" />
+            </a>
+          </td>` : ''}
+          ${facebook ? `<td style="padding-right: 5px;">
+            <a href="${facebook}">
+              <img src="https://img.icons8.com/?size=100&id=118466&format=png&color=000000" alt="Facebook" style="width: 15px; height: 15px;" />
+            </a>
+          </td>` : ''}
+          <td style="padding-right: 5px;">
+            <a href="${instagram}">
+              <img src="https://img.icons8.com/?size=100&id=32292&format=png&color=000000" alt="Instagram" style="width: 15px; height: 15px;" />
+            </a>
+          </td>
+          <td>
+            <a href="${linkedin}">
+              <img src="https://img.icons8.com/?size=100&id=98960&format=png&color=000000" alt="LinkedIn" style="width: 15px; height: 15px;" />
+            </a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+  <p style="margin-top: 10px; font-style: italic; font-size: 12px; color: #333;">
+        "We get <b style='color:#FF01B0;'>it done</b>." - code.store
+      </p>`;
+
+    document.getElementById('signaturePreview').innerHTML = html;
+    document.getElementById('copyButton').style.display = 'inline-block';
+  }
+
+  function copyHTML() {
+    const htmlContent = document.getElementById('signaturePreview').innerHTML;
+    const tempElement = document.createElement('textarea');
+    tempElement.value = htmlContent;
+    document.body.appendChild(tempElement);
+    tempElement.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempElement);
+    alert('Signature HTML copied to clipboard!');
+  }
+</script>
+</body>
+</html>
