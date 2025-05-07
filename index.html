@@ -117,9 +117,9 @@
 <table cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; font-size: 14px; color: #000;">
   <tr>
     <td style="vertical-align: top; padding-right: 10px;">
-      <img src="https://d36urhup7zbd7q.cloudfront.net/5007226260291584/4815612250292224/d2ce7639-308e-4bb0-9137-67fc3c3760df/logo.gif" alt="Logo" style="height: 110px;" />
+      <img src="https://d36urhup7zbd7q.cloudfront.net/5007226260291584/4815612250292224/d2ce7639-308e-4bb0-9137-67fc3c3760df/logo.gif" alt="Logo" style="height: 130px;" />
     </td>
-    <td style="border-left: 1px solid; padding-left: 10px;">
+    <td style="vertical-align: top; border-left: 1px solid; padding-left: 10px;">
       <p style="margin: 0; font-weight: bold; font-size: 16px;">${name}</p>
       <p style="margin: 0; font-weight: bold;">${position}, code.store</p>
 
@@ -179,14 +179,21 @@
   }
 
   function copyHTML() {
-    const htmlContent = document.getElementById('signaturePreview').innerHTML;
-    const tempElement = document.createElement('textarea');
-    tempElement.value = htmlContent;
-    document.body.appendChild(tempElement);
-    tempElement.select();
-    document.execCommand('copy');
-    document.body.removeChild(tempElement);
-    alert('Signature HTML copied to clipboard!');
+    const signaturePreview = document.getElementById('signaturePreview');
+    const range = document.createRange();
+    const selection = window.getSelection();
+
+    range.selectNodeContents(signaturePreview);
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    try {
+      document.execCommand('copy');
+      alert('Signature preview copied to clipboard!');
+    } catch (err) {
+      alert('Failed to copy signature preview: ' + err);
+    }
+    selection.removeAllRanges();
   }
 </script>
 </body>
