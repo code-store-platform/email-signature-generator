@@ -77,16 +77,16 @@
     <input id="phone" placeholder="+33 781 040 121" />
 
     <label for="linkedin">LinkedIn URL:</label>
-    <input id="linkedin" placeholder="https://www.linkedin.com/in/your-profile/" />
+    <input id="linkedin"  placeholder="https://www.linkedin.com/in/your-profile/" value="https://www.linkedin.com/company/code-store-tech/"/>
 
     <label for="facebook">Facebook URL:</label>
-    <input id="facebook" placeholder="https://www.facebook.com/your-page" />
+    <input id="facebook" placeholder="https://www.facebook.com/your-page" value="https://www.facebook.com/code.store.techservices"/>
 
     <label for="instagram">Instagram URL:</label>
-    <input id="instagram" placeholder="https://www.instagram.com/your-profile/" />
+    <input id="instagram" placeholder="https://www.instagram.com/your-profile/" value="https://www.instagram.com/code.store_tech/"/>
 
     <label for="youtube">YouTube URL:</label>
-    <input id="youtube" placeholder="https://www.youtube.com/@yourchannel" />
+    <input id="youtube" placeholder="https://www.youtube.com/@yourchannel" value="https://www.youtube.com/@code.store-tech/featured"/>
 
     <button onclick="generateSignature()">Generate</button>
   </div>
@@ -103,9 +103,9 @@
     const position = document.getElementById('position').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const website = 'https://code.store';
-    const linkedin = document.getElementById('linkedin').value.trim() || 'https://www.linkedin.com/company/code-store-tech/';
+    const linkedin = document.getElementById('linkedin').value.trim();
     const facebook = document.getElementById('facebook').value.trim();
-    const instagram = document.getElementById('instagram').value.trim() || 'https://www.instagram.com/code.store_tech/';
+    const instagram = document.getElementById('instagram').value.trim();
     const youtube = document.getElementById('youtube').value.trim();
 
     if (!name || !position) {
@@ -147,24 +147,24 @@
         <tr>
           ${youtube ? `<td style="padding-right: 5px;">
             <a href="${youtube}">
-              <img src="https://img.icons8.com/?size=100&id=62852&format=png&color=000000" alt="YouTube" style="width: 15px; height: 15px;" />
+              <img src="https://img.icons8.com/?size=100&id=37325&format=png&color=000000" alt="YouTube" style="width: 18px; height: 18px;" />
             </a>
           </td>` : ''}
           ${facebook ? `<td style="padding-right: 5px;">
             <a href="${facebook}">
-              <img src="https://img.icons8.com/?size=100&id=118466&format=png&color=000000" alt="Facebook" style="width: 15px; height: 15px;" />
+              <img src="https://img.icons8.com/?size=100&id=118468&format=png&color=000000" alt="Facebook" style="width: 18px; height: 18px;" />
             </a>
           </td>` : ''}
-          <td style="padding-right: 5px;">
+           ${instagram ? `<td style="padding-right: 5px;">
             <a href="${instagram}">
-              <img src="https://img.icons8.com/?size=100&id=32292&format=png&color=000000" alt="Instagram" style="width: 15px; height: 15px;" />
+              <img src="https://img.icons8.com/?size=100&id=32292&format=png&color=000000" alt="Instagram" style="width: 18px; height: 18px;" />
             </a>
-          </td>
-          <td>
+          </td>` : ''}
+          ${linkedin ? `<td>
             <a href="${linkedin}">
-              <img src="https://img.icons8.com/?size=100&id=98960&format=png&color=000000" alt="LinkedIn" style="width: 15px; height: 15px;" />
+              <img src="https://img.icons8.com/?size=100&id=447&format=png&color=000000" alt="LinkedIn" style="width: 18px; height: 18px;" />
             </a>
-          </td>
+          </td>` : ''}
         </tr>
       </table>
     </td>
