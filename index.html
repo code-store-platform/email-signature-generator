@@ -86,7 +86,11 @@
     <input id="instagram" placeholder="https://www.instagram.com/your-profile/" value="https://www.instagram.com/code.store_tech/"/>
 
     <label for="youtube">YouTube URL:</label>
-    <input id="youtube" placeholder="https://www.youtube.com/@yourchannel" value="https://www.youtube.com/@code.store-tech/featured"/>
+    <input id="youtube" placeholder="https://www.youtube.com/@yourchannel" value="https://www.youtube.com/@code.store-tech"/>
+
+    <label for="twitter">YouTube URL:</label>
+    <input id="twitter" placeholder="https://x.com/your-profile" value="https://x.com/codestore_tech"/>
+
 
     <button onclick="generateSignature()">Generate</button>
   </div>
@@ -107,6 +111,7 @@
     const facebook = document.getElementById('facebook').value.trim();
     const instagram = document.getElementById('instagram').value.trim();
     const youtube = document.getElementById('youtube').value.trim();
+    const twitter = document.getElementById('twitter').value.trim();
 
     if (!name || !position) {
       alert('Full Name and Position are required.');
@@ -147,22 +152,27 @@
         <tr>
           ${youtube ? `<td style="padding-right: 5px;">
             <a href="${youtube}">
-              <img src="https://img.icons8.com/?size=100&id=37325&format=png&color=000000" alt="YouTube" style="width: 18px; height: 18px;" />
+              <img src="https://img.icons8.com/?size=100&id=YBWof31cWNxO&format=png&color=000000" alt="YouTube" style="width: 20px; height: 20px;" />
             </a>
           </td>` : ''}
           ${facebook ? `<td style="padding-right: 5px;">
             <a href="${facebook}">
-              <img src="https://img.icons8.com/?size=100&id=118468&format=png&color=000000" alt="Facebook" style="width: 18px; height: 18px;" />
+              <img src="https://img.icons8.com/?size=100&id=UtuOAMO6cCHq&format=png&color=000000" alt="Facebook" style="width: 20px; height: 20px;" />
             </a>
           </td>` : ''}
            ${instagram ? `<td style="padding-right: 5px;">
             <a href="${instagram}">
-              <img src="https://img.icons8.com/?size=100&id=32292&format=png&color=000000" alt="Instagram" style="width: 18px; height: 18px;" />
+              <img src="https://img.icons8.com/?size=100&id=xmBM0gQ596LO&format=png&color=000000" alt="Instagram" style="width: 20px; height: 20px;" />
             </a>
           </td>` : ''}
           ${linkedin ? `<td>
             <a href="${linkedin}">
-              <img src="https://img.icons8.com/?size=100&id=447&format=png&color=000000" alt="LinkedIn" style="width: 18px; height: 18px;" />
+              <img src="https://img.icons8.com/?size=100&id=Xd9dyghg48d5&format=png&color=000000" alt="LinkedIn" style="width: 20px; height: 20px;" />
+            </a>
+          </td>` : ''}
+          ${twitter ? `<td>
+            <a href="${twitter}">
+              <img src="https://img.icons8.com/?size=100&id=L5LOu2UuSZnG&format=png&color=000000" alt="Twitter" style="width: 20px; height: 20px;" />
             </a>
           </td>` : ''}
         </tr>
