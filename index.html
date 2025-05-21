@@ -189,21 +189,22 @@
     document.getElementById('copyButton').style.display = 'inline-block';
   }
 
-  async function copyHTML() {
-    const signaturePreview = document.getElementById('signaturePreview');
-    const html = signaturePreview.innerHTML;
+  function copyHTML() {
+    const html = document.getElementById('signaturePreview').innerHTML;
+
+    const textarea = document.createElement('textarea');
+    textarea.value = html;
+    document.body.appendChild(textarea);
+    textarea.select();
 
     try {
-      await navigator.clipboard.write([
-        new ClipboardItem({
-          'text/html': new Blob([html], { type: 'text/html' }),
-          'text/plain': new Blob([signaturePreview.textContent], { type: 'text/plain' })
-        })
-      ]);
-      alert('Signature preview copied to clipboard!');
+      const successful = document.execCommand('copy');
+      alert(successful ? 'Signature HTML copied!' : 'Failed to copy.');
     } catch (err) {
-      alert('Failed to copy signature preview: ' + err);
+      alert('Error copying: ' + err);
     }
+
+    document.body.removeChild(textarea);
   }
 </script>
 </body>
