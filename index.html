@@ -58,7 +58,7 @@
       margin-top: 20px;
     }
 
-    .preview-block{
+    .preview-block {
       min-height: 250px;
     }
 
@@ -66,7 +66,6 @@
       margin-top: 10px;
       display: none;
     }
-
   </style>
 </head>
 <body>
@@ -83,19 +82,19 @@
     <input id="phone" placeholder="+33 781 040 121" />
 
     <label for="linkedin">LinkedIn URL:</label>
-    <input id="linkedin"  placeholder="https://www.linkedin.com/in/your-profile/" value="https://www.linkedin.com/company/code-store-tech/"/>
+    <input id="linkedin" value="https://www.linkedin.com/company/code-store-tech/" />
 
     <label for="facebook">Facebook URL:</label>
-    <input id="facebook" placeholder="https://www.facebook.com/your-page" value="https://www.facebook.com/code.store.techservices"/>
+    <input id="facebook" value="https://www.facebook.com/code.store.techservices" />
 
     <label for="instagram">Instagram URL:</label>
-    <input id="instagram" placeholder="https://www.instagram.com/your-profile/" value="https://www.instagram.com/code.store_tech/"/>
+    <input id="instagram" value="https://www.instagram.com/code.store_tech/" />
 
     <label for="youtube">YouTube URL:</label>
-    <input id="youtube" placeholder="https://www.youtube.com/@yourchannel" value="https://www.youtube.com/@code.store-tech"/>
+    <input id="youtube" value="https://www.youtube.com/@code.store-tech" />
 
     <label for="twitter">Twitter URL:</label>
-    <input id="twitter" placeholder="https://x.com/your-profile" value="https://x.com/codestore_tech"/>
+    <input id="twitter" value="https://x.com/codestore_tech" />
 
     <button onclick="generateSignature()">Generate</button>
   </div>
@@ -103,49 +102,61 @@
   <div class="info-block">
     <div class="preview-block">
       <div class="preview spaced" id="signaturePreview"></div>
-      <button id="copyButton" onclick="copy()">Copy</button>
+      <button id="copyButton" onclick="copySignature()">Copy</button>
     </div>
     <div>
-      <p>
-        To set up your corporate signature, please follow these steps:
-      </p>
+      <p>To set up your corporate signature, please follow these steps:</p>
       <ol>
-        <li>
-          Fill out the form with your <strong>Full Name</strong> and <strong>Position</strong>.
-          Including your phone number is optional.
-        </li>
-        <li>
-          You can replace the social media links with your personal profiles or keep the default corporate ones — it’s your choice.
-        </li>
-        <li>
-          After entering your details, click <strong>“Generate”</strong>.
-        </li>
-        <li>
-          Once the signature is generated, click <strong>“Copy”</strong>.
-        </li>
+        <li>Fill out the form with your <strong>Full Name</strong> and <strong>Position</strong>. Including your phone number is optional.</li>
+        <li>You can replace the social media links with your personal profiles or keep the default corporate ones.</li>
+        <li>Click <strong>“Generate”</strong>.</li>
+        <li>Click <strong>“Copy”</strong> to copy the signature.</li>
       </ol>
     </div>
   </div>
 </div>
 
 <script>
+  const socialIcons = {
+    youtube: 'YBWof31cWNxO',
+    facebook: 'UtuOAMO6cCHq',
+    instagram: 'xmBM0gQ596LO',
+    linkedin: 'Xd9dyghg48d5',
+    twitter: 'L5LOu2UuSZnG',
+  };
+
+  function createIconRow(iconId, link, alt) {
+    return `
+      <td style="padding-right: 5px;">
+        <a href="${link}" target="_blank">
+          <img src="https://img.icons8.com/?size=100&id=${iconId}&format=png&color=000000" alt="${alt}" style="width: 20px; height: 20px;" />
+        </a>
+      </td>`;
+  }
+
   function generateSignature() {
     const name = document.getElementById('name').value.trim();
     const position = document.getElementById('position').value.trim();
     const phone = document.getElementById('phone').value.trim();
-    const website = 'https://code.store';
-    const linkedin = document.getElementById('linkedin').value.trim();
-    const facebook = document.getElementById('facebook').value.trim();
-    const instagram = document.getElementById('instagram').value.trim();
-    const youtube = document.getElementById('youtube').value.trim();
-    const twitter = document.getElementById('twitter').value.trim();
+    const links = {
+      linkedin: document.getElementById('linkedin').value.trim(),
+      facebook: document.getElementById('facebook').value.trim(),
+      instagram: document.getElementById('instagram').value.trim(),
+      youtube: document.getElementById('youtube').value.trim(),
+      twitter: document.getElementById('twitter').value.trim(),
+    };
 
     if (!name || !position) {
       alert('Full Name and Position are required.');
       return;
     }
 
-    const html = `
+    const socialRow = Object.entries(links)
+            .filter(([_, url]) => url)
+            .map(([key, url]) => createIconRow(socialIcons[key], url, key.charAt(0).toUpperCase() + key.slice(1)))
+            .join('');
+
+    const signatureHTML = `
 <table cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; font-size: 14px; color: #000;">
   <tr>
     <td style="vertical-align: top; padding-right: 10px;">
@@ -161,48 +172,18 @@
           <td style="padding: 2px 6px 2px 0;">
             <img src="https://img.icons8.com/?size=100&id=9659&format=png&color=FF01B0" alt="Phone" style="width: 14px; height: 14px;" />
           </td>
-          <td>
-            <a href="tel:${phone.replace(/\s+/g, '')}" style="text-decoration:none;color:#000;">${phone}</a>
-          </td>
+          <td><a href="tel:${phone.replace(/\s+/g, '')}" style="text-decoration:none;color:#000;">${phone}</a></td>
         </tr>` : ''}
         <tr>
           <td style="padding: 2px 6px 2px 0;">
             <img src="https://img.icons8.com/?size=100&id=53372&format=png&color=FF01B0" alt="Website" style="width: 14px; height: 14px;" />
           </td>
-          <td>
-            <a href="${website}" style="text-decoration: none; color: #000;">code.store</a>
-          </td>
+          <td><a href="https://code.store" style="text-decoration: none; color: #000;">code.store</a></td>
         </tr>
       </table>
 
       <table cellpadding="0" cellspacing="0" style="margin-top: 8px;">
-        <tr>
-          ${youtube ? `<td style="padding-right: 5px;">
-            <a href="${youtube}">
-              <img src="https://img.icons8.com/?size=100&id=YBWof31cWNxO&format=png&color=000000" alt="YouTube" style="width: 20px; height: 20px;" />
-            </a>
-          </td>` : ''}
-          ${facebook ? `<td style="padding-right: 5px;">
-            <a href="${facebook}">
-              <img src="https://img.icons8.com/?size=100&id=UtuOAMO6cCHq&format=png&color=000000" alt="Facebook" style="width: 20px; height: 20px;" />
-            </a>
-          </td>` : ''}
-          ${instagram ? `<td style="padding-right: 5px;">
-            <a href="${instagram}">
-              <img src="https://img.icons8.com/?size=100&id=xmBM0gQ596LO&format=png&color=000000" alt="Instagram" style="width: 20px; height: 20px;" />
-            </a>
-          </td>` : ''}
-          ${linkedin ? `<td style="padding-right: 5px;">
-            <a href="${linkedin}">
-              <img src="https://img.icons8.com/?size=100&id=Xd9dyghg48d5&format=png&color=000000" alt="LinkedIn" style="width: 20px; height: 20px;" />
-            </a>
-          </td>` : ''}
-          ${twitter ? `<td>
-            <a href="${twitter}">
-              <img src="https://img.icons8.com/?size=100&id=L5LOu2UuSZnG&format=png&color=000000" alt="Twitter" style="width: 20px; height: 20px;" />
-            </a>
-          </td>` : ''}
-        </tr>
+        <tr>${socialRow}</tr>
       </table>
     </td>
   </tr>
@@ -211,24 +192,22 @@
   "We get <b style='color:#FF01B0;'>it done</b>." - code.store
 </p>`;
 
-    document.getElementById('signaturePreview').innerHTML = html;
+    document.getElementById('signaturePreview').innerHTML = signatureHTML;
     document.getElementById('copyButton').style.display = 'inline-block';
   }
 
-  async function copy() {
-    const signaturePreview = document.getElementById('signaturePreview');
-    const html = signaturePreview.innerHTML;
-
+  async function copySignature() {
+    const signature = document.getElementById('signaturePreview');
     try {
       await navigator.clipboard.write([
         new ClipboardItem({
-          'text/html': new Blob([html], { type: 'text/html' }),
-          'text/plain': new Blob([signaturePreview.textContent], { type: 'text/plain' })
+          'text/html': new Blob([signature.innerHTML], { type: 'text/html' }),
+          'text/plain': new Blob([signature.textContent], { type: 'text/plain' })
         })
       ]);
       alert('Signature copied to clipboard!');
     } catch (err) {
-      alert('Failed to copy signature: ' + err);
+      alert('Copy failed: ' + err.message);
     }
   }
 </script>
