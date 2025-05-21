@@ -67,11 +67,6 @@
       display: none;
     }
 
-    .error {
-      margin-top: 10px;
-      color: red;
-      font-weight: bold;
-    }
   </style>
 </head>
 <body>
@@ -103,13 +98,12 @@
     <input id="twitter" placeholder="https://x.com/your-profile" value="https://x.com/codestore_tech"/>
 
     <button onclick="generateSignature()">Generate</button>
-    <div id="errorMessage" class="error"></div>
   </div>
 
   <div class="info-block">
     <div class="preview-block">
       <div class="preview spaced" id="signaturePreview"></div>
-      <button id="copyButton" onclick="copyHTML()">Copy</button>
+      <button id="copyButton" onclick="copy()">Copy</button>
     </div>
     <div>
       <p>
@@ -145,12 +139,9 @@
     const instagram = document.getElementById('instagram').value.trim();
     const youtube = document.getElementById('youtube').value.trim();
     const twitter = document.getElementById('twitter').value.trim();
-    const errorMessage = document.getElementById('errorMessage');
-
-    errorMessage.textContent = '';
 
     if (!name || !position) {
-      errorMessage.textContent = 'Full Name and Position are required.';
+      alert('Full Name and Position are required.');
       return;
     }
 
@@ -218,50 +209,27 @@
 </table>
 <p style="margin-top: 10px; font-style: italic; font-size: 12px; color: #333;">
   "We get <b style='color:#FF01B0;'>it done</b>." - code.store
-</p>
-`.trim();
+</p>`;
 
-    const previewDiv = document.getElementById('signaturePreview');
-    previewDiv.innerHTML = html;
-
-    const copyBtn = document.getElementById('copyButton');
-    copyBtn.style.display = 'inline-block';
+    document.getElementById('signaturePreview').innerHTML = html;
+    document.getElementById('copyButton').style.display = 'inline-block';
   }
 
-  function copyHTML() {
-    const previewDiv = document.getElementById('signaturePreview');
-    const htmlToCopy = previewDiv.innerHTML;
+  async function copy() {
+    const signaturePreview = document.getElementById('signaturePreview');
+    const html = signaturePreview.innerHTML;
 
-    if (!htmlToCopy) return;
-
-    if (navigator.clipboard && navigator.clipboard.write) {
-      const blobInput = new Blob([htmlToCopy], { type: 'text/html' });
-      const clipboardItem = new ClipboardItem({ 'text/html': blobInput });
-      navigator.clipboard.write([clipboardItem]).then(() => {
-        alert('Signature copied to clipboard!');
-      }).catch(() => {
-        fallbackCopyText(htmlToCopy);
-      });
-    } else {
-      fallbackCopyText(htmlToCopy);
-    }
-  }
-
-  function fallbackCopyText(text) {
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.style.position = 'fixed'; // Prevent scrolling to bottom
-    document.body.appendChild(textarea);
-    textarea.focus();
-    textarea.select();
     try {
-      const successful = document.execCommand('copy');
-      if (successful) alert('Signature copied to clipboard!');
-      else alert('Failed to copy signature.');
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          'text/html': new Blob([html], { type: 'text/html' }),
+          'text/plain': new Blob([signaturePreview.textContent], { type: 'text/plain' })
+        })
+      ]);
+      alert('Signature copied to clipboard!');
     } catch (err) {
-      alert('Failed to copy signature.');
+      alert('Failed to copy signature: ' + err);
     }
-    document.body.removeChild(textarea);
   }
 </script>
 </body>
