@@ -1,168 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Email Signature Generator</title>
-  <style>
-    :root {
-      --accent-color: #FF01B0;
-      --text-color: #000;
-      --font-family: Arial, sans-serif;
-    }
+    <meta charset="UTF-8" />
+    <title>Email Signature Generator</title>
+    <style>
+        :root {
+            --accent-color: #FF01B0;
+            --text-color: #000;
+            --font-family: Arial, sans-serif;
+        }
 
-    body {
-      font-family: var(--font-family);
-      margin: 20px;
-      font-size: 14px;
-      background: white;
-    }
+        body {
+            font-family: var(--font-family);
+            margin: 20px;
+            font-size: 14px;
+            background: white;
+        }
 
-    .content {
-      display: flex;
-      gap: 50px;
-      width: 100%;
-    }
+        .content {
+            display: flex;
+            gap: 50px;
+            width: 100%;
+        }
 
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
 
-    input {
-      width: 100%;
-      max-width: 400px;
-      padding: 6px 10px;
-      margin-bottom: 8px;
-      font-size: 14px;
-      border: 1px solid var(--text-color);
-      border-radius: 4px;
-    }
+        input {
+            width: 100%;
+            max-width: 400px;
+            padding: 6px 10px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            border: 1px solid var(--text-color);
+            border-radius: 4px;
+        }
 
-    button {
-      margin-top: 16px;
-      padding: 8px 16px;
-      font-size: 14px;
-      background-color: var(--accent-color);
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+        button {
+            margin-top: 16px;
+            padding: 8px 16px;
+            font-size: 14px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-    button:hover {
-      opacity: 0.9;
-    }
+        button:hover {
+            opacity: 0.9;
+        }
 
-    .spaced {
-      margin-top: 20px;
-    }
+        .spaced {
+            margin-top: 20px;
+        }
 
-    .preview-block {
-      min-height: 250px;
-    }
+        .preview-block {
+            min-height: 250px;
+        }
 
-    #copyButton {
-      margin-top: 10px;
-      display: none;
-    }
-  </style>
+        #copyButton {
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <h2>Email Signature Generator</h2>
 <div class="content">
-  <div class="form-block">
-    <label for="name">Full Name: *</label>
-    <input id="name" placeholder="Oksana Shmiliak" />
+    <div class="form-block">
+        <label for="name">Full Name: *</label>
+        <input id="name" placeholder="Oksana Shmiliak" />
 
-    <label for="position">Position: *</label>
-    <input id="position" placeholder="HR" />
+        <label for="position">Position: *</label>
+        <input id="position" placeholder="HR" />
 
-    <label for="phone">Phone:</label>
-    <input id="phone" placeholder="+33 781 040 121" />
+        <label for="phone">Phone:</label>
+        <input id="phone" placeholder="+33 781 040 121" />
 
-    <label for="linkedin">LinkedIn URL:</label>
-    <input id="linkedin" value="https://www.linkedin.com/company/code-store-tech/" />
+        <label for="linkedin">LinkedIn URL:</label>
+        <input id="linkedin" value="https://www.linkedin.com/company/code-store-tech/" />
 
-    <label for="facebook">Facebook URL:</label>
-    <input id="facebook" value="https://www.facebook.com/code.store.techservices" />
+        <label for="facebook">Facebook URL:</label>
+        <input id="facebook" value="https://www.facebook.com/code.store.techservices" />
 
-    <label for="instagram">Instagram URL:</label>
-    <input id="instagram" value="https://www.instagram.com/code.store_tech/" />
+        <label for="instagram">Instagram URL:</label>
+        <input id="instagram" value="https://www.instagram.com/code.store_tech/" />
 
-    <label for="youtube">YouTube URL:</label>
-    <input id="youtube" value="https://www.youtube.com/@code.store-tech" />
+        <label for="youtube">YouTube URL:</label>
+        <input id="youtube" value="https://www.youtube.com/@code.store-tech" />
 
-    <label for="twitter">Twitter URL:</label>
-    <input id="twitter" value="https://x.com/codestore_tech" />
+        <label for="twitter">Twitter URL:</label>
+        <input id="twitter" value="https://x.com/codestore_tech" />
 
-    <button onclick="generateSignature()">Generate</button>
-  </div>
+        <label for="bookMeeting">Book a Meeting URL:</label>
+        <input id="bookMeeting" placeholder="https://your-link" />
 
-  <div class="info-block">
-    <div class="preview-block">
-      <div class="preview spaced" id="signaturePreview"></div>
-      <button id="copyButton" onclick="copySignature()">Copy</button>
+        <button onclick="generateSignature()">Generate</button>
     </div>
-    <div>
-      <p>To set up your corporate signature, please follow these steps:</p>
-      <ol>
-        <li>Fill out the form with your <strong>Full Name</strong> and <strong>Position</strong>. Including your phone number is optional.</li>
-        <li>You can replace the social media links with your personal profiles or keep the default corporate ones.</li>
-        <li>Click <strong>“Generate”</strong>.</li>
-        <li>Click <strong>“Copy”</strong> to copy the signature.</li>
-      </ol>
+
+    <div class="info-block">
+        <div class="preview-block">
+            <div class="preview spaced" id="signaturePreview"></div>
+            <button id="copyButton" onclick="copySignature()">Copy</button>
+        </div>
+        <div>
+            <p>To set up your corporate signature, please follow these steps:</p>
+            <ol>
+                <li>Fill out the form with your <strong>Full Name</strong> and <strong>Position</strong>. Including your phone number is optional.</li>
+                <li>You can replace the social media links with your personal profiles or keep the default corporate ones.</li>
+                <li>Click <strong>“Generate”</strong>.</li>
+                <li>Click <strong>“Copy”</strong> to copy the signature.</li>
+            </ol>
+        </div>
     </div>
-  </div>
 </div>
 
 <script>
-  const socialIcons = {
-    youtube: 'YBWof31cWNxO',
-    facebook: 'UtuOAMO6cCHq',
-    instagram: 'xmBM0gQ596LO',
-    linkedin: 'Xd9dyghg48d5',
-    twitter: 'L5LOu2UuSZnG',
-  };
+    const socialIcons = {
+        youtube: 'YBWof31cWNxO',
+        facebook: 'UtuOAMO6cCHq',
+        instagram: 'xmBM0gQ596LO',
+        linkedin: 'Xd9dyghg48d5',
+        twitter: 'L5LOu2UuSZnG',
+    };
 
-  function createIconRow(iconId, link, alt) {
-    return `
+    function createIconRow(iconId, link, alt) {
+        return `
       <td style="padding-right: 5px;">
         <a href="${link}" target="_blank">
           <img src="https://img.icons8.com/?size=100&id=${iconId}&format=png&color=000000" alt="${alt}" style="width: 20px; height: 20px;" />
         </a>
       </td>`;
-  }
-
-  function generateSignature() {
-    const name = document.getElementById('name').value.trim();
-    const position = document.getElementById('position').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const links = {
-      linkedin: document.getElementById('linkedin').value.trim(),
-      facebook: document.getElementById('facebook').value.trim(),
-      instagram: document.getElementById('instagram').value.trim(),
-      youtube: document.getElementById('youtube').value.trim(),
-      twitter: document.getElementById('twitter').value.trim(),
-    };
-
-    if (!name || !position) {
-      alert('Full Name and Position are required.');
-      return;
     }
 
-    const socialRow = Object.entries(links)
+    function generateSignature() {
+        const name = document.getElementById('name').value.trim();
+        const position = document.getElementById('position').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const bookMeetingUrl = document.getElementById('bookMeeting').value.trim();
+        const links = {
+            linkedin: document.getElementById('linkedin').value.trim(),
+            facebook: document.getElementById('facebook').value.trim(),
+            instagram: document.getElementById('instagram').value.trim(),
+            youtube: document.getElementById('youtube').value.trim(),
+            twitter: document.getElementById('twitter').value.trim(),
+        };
+
+        if (!name || !position) {
+            alert('Full Name and Position are required.');
+            return;
+        }
+
+        const socialRow = Object.entries(links)
             .filter(([_, url]) => url)
             .map(([key, url]) => createIconRow(socialIcons[key], url, key.charAt(0).toUpperCase() + key.slice(1)))
             .join('');
 
-    const signatureHTML = `
+        const bookMeetingButton = bookMeetingUrl
+            ? `<tr>
+          <td colspan="5" style="padding-top: 8px;">
+            <a href="${bookMeetingUrl}" target="_blank" style="
+              display: inline-block;
+              padding: 6px 12px;
+              background-color: #FF01B0;
+              color: #fff;
+              text-decoration: none;
+              border-radius: 4px;
+              font-size: 14px;
+            ">Book a Meeting</a>
+          </td>
+        </tr>`
+            : '';
+
+        const signatureHTML = `
 <table cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; font-size: 14px; color: #000;">
   <tr>
-    <td style="vertical-align: top; padding-right: 10px;">
+    <td style="vertical-align: middle; padding-right: 10px;">
       <img src="https://d36urhup7zbd7q.cloudfront.net/6225923908960256/5259067245068288/4aa19989-1c25-4d29-b788-c748f22340f4/logo.gif?ck=1747823660.47#logo" alt="Logo" style="height: 130px;" />
     </td>
-    <td style="vertical-align: top; border-left: 1px solid; padding-left: 10px;">
+    <td style="vertical-align: middle; border-left: 1px solid; padding-left: 10px;">
       <p style="margin: 0; font-weight: bold; font-size: 16px;">${name}</p>
       <p style="margin: 0; font-weight: bold;">${position}</p>
 
@@ -184,6 +204,7 @@
 
       <table cellpadding="0" cellspacing="0" style="margin-top: 8px;">
         <tr>${socialRow}</tr>
+        ${bookMeetingButton}
       </table>
     </td>
   </tr>
@@ -192,24 +213,24 @@
   "We get <b style='color:#FF01B0;'>it done</b>." - code.store
 </p>`;
 
-    document.getElementById('signaturePreview').innerHTML = signatureHTML;
-    document.getElementById('copyButton').style.display = 'inline-block';
-  }
-
-  async function copySignature() {
-    const signature = document.getElementById('signaturePreview');
-    try {
-      await navigator.clipboard.write([
-        new ClipboardItem({
-          'text/html': new Blob([signature.innerHTML], { type: 'text/html' }),
-          'text/plain': new Blob([signature.textContent], { type: 'text/plain' })
-        })
-      ]);
-      alert('Signature copied to clipboard!');
-    } catch (err) {
-      alert('Copy failed: ' + err.message);
+        document.getElementById('signaturePreview').innerHTML = signatureHTML;
+        document.getElementById('copyButton').style.display = 'inline-block';
     }
-  }
+
+    async function copySignature() {
+        const signature = document.getElementById('signaturePreview');
+        try {
+            await navigator.clipboard.write([
+                new ClipboardItem({
+                    'text/html': new Blob([signature.innerHTML], { type: 'text/html' }),
+                    'text/plain': new Blob([signature.textContent], { type: 'text/plain' })
+                })
+            ]);
+            alert('Signature copied to clipboard!');
+        } catch (err) {
+            alert('Copy failed: ' + err.message);
+        }
+    }
 </script>
 </body>
 </html>
